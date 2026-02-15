@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>San Valentín Romí 💖</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #ffc0cb; /* Fondo rosado */
+      font-family: Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    #container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    #title {
+      color: #ff4fa3;
+      font-size: 30px;
+      margin-bottom: 40px;
+    }
+
+    #buttons {
+      display: flex;
+      gap: 40px;
+    }
+
+    button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yes {
+      background-color: #ff4fa3;
+      color: white;
+    }
+
+    #no {
+      background-color: white;
+      color: #ff4fa3;
+      position: relative;
+    }
+
+    #mensaje-final {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1000;
+      text-align: center;
+      color: #ff4fa3;
+      font-family: Arial, sans-serif;
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 600px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <h1 id="title">Mi Romi, Mi Niña Hermosa 💕<br>¿Quieres ser mi San Valentín? 💕</h1>
+    <div id="buttons">
+      <button id="yes">Sí 💖</button>
+      <button id="no">No 😼</button>
+    </div>
+  </div>
+
+  <script>
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+
+    // Botón NO huyendo
+    noBtn.addEventListener("mouseover", function() {
+      noBtn.style.position = "absolute";
+      noBtn.style.left = Math.random() * (window.innerWidth - noBtn.offsetWidth) + "px";
+      noBtn.style.top = Math.random() * (window.innerHeight - noBtn.offsetHeight) + "px";
+    });
+
+    // Botón SÍ
+    yesBtn.addEventListener("click", function() {
+      // Ocultar botones
+      const buttonsContainer = document.getElementById("buttons");
+      if(buttonsContainer){
+        buttonsContainer.style.display = "none";
+      }
+
+      // Corazones volando
+      function crearCorazon() {
+        const corazones = ["💞", "💕", "💗", "💘"];
+        const heart = document.createElement("div");
+        heart.innerText = corazones[Math.floor(Math.random() * corazones.length)];
+        heart.style.position = "fixed";
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = "-50px";
+        heart.style.fontSize = Math.random() * 30 + 20 + "px";
+        heart.style.pointerEvents = "none";
+        const colores = ["#ff4fa3", "#ff70b3", "#ff99c8"];
+        heart.style.color = colores[Math.floor(Math.random() * colores.length)];
+        document.body.appendChild(heart);
+        let velocidad = 1 + Math.random() * 3;
+        const anim = setInterval(() => {
+          let top = parseFloat(heart.style.top);
+          heart.style.top = top + velocidad + "px";
+          if(top > window.innerHeight){
+            heart.remove();
+            clearInterval(anim);
+          }
+        }, 20);
+      }
+      const corazonInterval = setInterval(crearCorazon, 300);
+      setTimeout(() => clearInterval(corazonInterval), 15000);
+
+      // Mensaje final con todo el texto que me diste
+      const mensaje = document.createElement("div");
+      mensaje.id = "mensaje-final";
+      mensaje.innerHTML = `
+        <p style="font-size:16px; line-height:1.5; text-align:center;">
+          Desde que llegaste, mi vida dio un giro de 360® y alegraste mis días con tu dulce sonrisa, 
+          este es nuestro primer San Valentín y quiero que sea el primero de muchos más 💕 , 
+          por eso mismo te digo que te amo pero no te amo cualquiera, te amo por toda la felicidad y amor que me das, 
+          te amo por tu forma de ser, tus lindos ojos absolutamente todo, te elegiría a ti en esta y en millones de vidas más, 
+          eso significa un "Te amo" mi niña, si pudiera te diría todo esto de frente pero a pesar de la distancia mi amor jamás disminuirá, 
+          porque te ganaste mi corazón y alma y realmente deseo que algún día podamos encontrarnos así darte un fuerte abrazo apenas te vea en el aeropuerto. 
+          Quiero que seas tú, la madre de mis futuros hijos, mi niña de hermosos ojos, mi princesa de Disney, el six de mi seven, 
+          y la mujer que siempre amaré por toda mi vida y nadie podrá hacerme cambiar de parecer. 
+          Serás y siempre serás tú 💕
+        </p>
+
+        <!-- Video de YouTube al final del texto -->
+        <iframe width="320" height="180"
+        src="https://www.youtube.com/embed/JkLHjhz2O8k?autoplay=1&controls=1&rel=0"
+        title="YouTube video player"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen>
+        </iframe>
+      `;
+      document.body.appendChild(mensaje);
+    });
+  </script>
+</body>
+</html>
